@@ -8,30 +8,104 @@ rgba( #000, .2 ); font-weight: 600;
 }
 h1 {
   font-size: 300%;
+  font-family: "Trebuchet MS";
 }
-.button {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+
+body {
+  background-image: url("http://www.zastavki.com/pictures/originals/2012/Backgrounds_Nice_colors_035593_.jpg");
+  background-repeat: no-repeat;
+
+}
+
+#startButton {
+  background: #2059c9;
+  background-image: -webkit-linear-gradient(top, #2059c9, #2059c9);
+  background-image: -moz-linear-gradient(top, #2059c9, #2059c9);
+  background-image: -ms-linear-gradient(top, #2059c9, #2059c9);
+  background-image: -o-linear-gradient(top, #2059c9, #2059c9);
+  background-image: linear-gradient(to bottom, #2059c9, #2059c9);
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 28px;
+  -webkit-box-shadow: 0px 1px 3px #2059c9;
+  -moz-box-shadow: 0px 1px 3px #2059c9;
+  box-shadow: 0px 1px 3px #2059c9;
   font-family: Arial;
   color: #ffffff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
+  border: solid #2059c9 2px;
   text-decoration: none;
 }
 
-.button:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+#startButton:hover {
+  background: #2059c9;
+  background-image: -webkit-linear-gradient(top, #2059c9, #f2cf22);
+  background-image: -moz-linear-gradient(top, #2059c9, #f2cf22);
+  background-image: -ms-linear-gradient(top, #2059c9, #f2cf22);
+  background-image: -o-linear-gradient(top, #2059c9, #f2cf22);
+  background-image: linear-gradient(to bottom, #2059c9, #f2cf22);
+  text-decoration: none;
+}
+
+#callButton {
+  background: #1aa305;
+  background-image: -webkit-linear-gradient(top, #1aa305, #1aa305);
+  background-image: -moz-linear-gradient(top, #1aa305, #1aa305);
+  background-image: -ms-linear-gradient(top, #1aa305, #1aa305);
+  background-image: -o-linear-gradient(top, #1aa305, #1aa305);
+  background-image: linear-gradient(to bottom, #1aa305, #1aa305);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  -webkit-box-shadow: 0px 1px 3px #1aa305;
+  -moz-box-shadow: 0px 1px 3px #1aa305;
+  box-shadow: 0px 1px 3px #1aa305;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #1aa305 2px;
+  text-decoration: none;
+}
+
+#callButton:hover {
+  background: #1aa305;
+  background-image: -webkit-linear-gradient(top, #1aa305, #f2cf22);
+  background-image: -moz-linear-gradient(top, #1aa305, #f2cf22);
+  background-image: -ms-linear-gradient(top, #1aa305, #f2cf22);
+  background-image: -o-linear-gradient(top, #1aa305, #f2cf22);
+  background-image: linear-gradient(to bottom, #1aa305, #f2cf22);
+  text-decoration: none;
+}
+
+#hangupButton {
+  background: #c20404;
+  background-image: -webkit-linear-gradient(top, #c20404, #c20404);
+  background-image: -moz-linear-gradient(top, #c20404, #c20404);
+  background-image: -ms-linear-gradient(top, #c20404, #c20404);
+  background-image: -o-linear-gradient(top, #c20404, #c20404);
+  background-image: linear-gradient(to bottom, #c20404, #c20404);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  -webkit-box-shadow: 0px 1px 3px #c20404;
+  -moz-box-shadow: 0px 1px 3px #c20404;
+  box-shadow: 0px 1px 3px #c20404;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #c20404 2px;
+  text-decoration: none;
+}
+
+#hangupButton:hover {
+  background: #c20404;
+  background-image: -webkit-linear-gradient(top, #c20404, #f2cf22);
+  background-image: -moz-linear-gradient(top, #c20404, #f2cf22);
+  background-image: -ms-linear-gradient(top, #c20404, #f2cf22);
+  background-image: -o-linear-gradient(top, #c20404, #f2cf22);
+  background-image: linear-gradient(to bottom, #c20404, #f2cf22);
   text-decoration: none;
 }
