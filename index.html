@@ -7,19 +7,22 @@
 <meta name="description" content="WebRTC" />
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-<title>WebRTC</title>
+  <title>WebRTC</title>
+  <link rel="stylesheet" href="css/layout.css">
 
 <style>
 </style>
-
-    <script src='js/lib/adapter.js'></script>
 
 </head>
 
 <body>
 
-  <video id="localVideo" autoplay muted></video>
-  <video id="remoteVideo" autoplay muted></video>
+  <script src='http://localhost:2013/socket.io/socket.io.js'></script>
+  <script src='js/lib/adapter.js'></script>
+  <script src="js/main.js"></script>
+
+  <video id="localVideo" autoplay></video>
+  <video id="remoteVideo" autoplay></video>
 
   <div>
     <button id="startButton">Start</button>
