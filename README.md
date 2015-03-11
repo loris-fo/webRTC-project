@@ -1,4 +1,4 @@
-#Battleships Web
+#webRTC project 1
 
 This repository shows my work work on a project including webRTC!
 
