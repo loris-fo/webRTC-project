@@ -11,9 +11,21 @@ h1 {
   font-family: "Trebuchet MS";
 }
 
+#header {
+  height: 121px;
+  position: relative;
+  background-color: black;
+}
+
+
 body {
-  background-image: url("http://www.zastavki.com/pictures/originals/2012/Backgrounds_Nice_colors_035593_.jpg");
-  background-repeat: no-repeat;
+/*  background-image: url("http://www.zastavki.com/pictures/originals/2012/Backgrounds_Nice_colors_035593_.jpg");
+  background-repeat: no-repeat;*/
+  background: url("http://tinyurl.com/oouofkd") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
 }
 
@@ -108,4 +120,32 @@ body {
   background-image: -o-linear-gradient(top, #c20404, #f2cf22);
   background-image: linear-gradient(to bottom, #c20404, #f2cf22);
   text-decoration: none;
+}
+
+header {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  background:#009688;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+  -webkit-box-shadow: 0px 2px 2px black;
+  -moz-box-shadow: ;
+  box-shadow: ;
+}
+
+#logo {
+  position: absolute;
+  top:17px; /*CHANGE Y of Logo*/
+  left:10px; /*CHANGE X of Logo*/
+  width: 120px;
+  height: auto;
+}
+
+#rooms {
+  float: right;
+  padding-right: 15px;
 }

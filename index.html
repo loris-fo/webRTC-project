@@ -1,147 +1,159 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
 
-<meta name="keywords" content="JavaScript, WebRTC" />
-<meta name="description" content="WebRTC" />
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="keywords" content="JavaScript, WebRTC" />
+    <meta name="description" content="WebRTC" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-  <title>WebRTC</title>
-  <link rel="stylesheet" href="css/layout.css">
+    <title>WebRTC</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<style>
-</style>
+  </head>
 
-</head>
+  <body>
 
-<body>
+    <header>
 
-  <h1>Welcome to SkypeRTC!</h1>
+      <h1> Talking mirrors </h1>
 
-  <script src='http://localhost:2013/socket.io/socket.io.js'></script>
-  <script src='js/lib/adapter.js'></script>
-  <script src="js/main.js"></script>
+      <img id="logo" src="http://www.unocero.com//wp-content/uploads/2012/07/Chrome-WebRTC-logo-image.png" />
 
-  <video id="remoteVideo" autoplay></video>
-  <center><video width="150" height="200" id="localVideo" autoplay></video></center>
+      <form id="rooms" action="/" method="get">
+        room: <input id="inputfield" type="text" name="room">
+        <input id="submitbutton" type="submit" value="submit">
+      </form>
 
-  <div>
-    <button id="startButton">Start</button>
-    <button id="callButton">Call</button>
-    <button id="hangupButton">Hang Up</button>
-  </div>
+    </header>
 
-<script>
-var localStream, localPeerConnection, remotePeerConnection;
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src='http://localhost:2013/socket.io/socket.io.js'></script>
+    <script src='js/lib/adapter.js'></script>
 
-var localVideo = document.getElementById("localVideo");
-var remoteVideo = document.getElementById("remoteVideo");
 
-var startButton = document.getElementById("startButton");
-var callButton = document.getElementById("callButton");
-var hangupButton = document.getElementById("hangupButton");
-startButton.disabled = false;
-callButton.disabled = true;
-hangupButton.disabled = true;
-startButton.onclick = start;
-callButton.onclick = call;
-hangupButton.onclick = hangup;
+    <video id="remoteVideo" autoplay></video>
+    <center><video width="150" height="200" id="localVideo" autoplay></video></center>
 
-function trace(text) {
-  console.log((performance.now() / 1000).toFixed(3) + ": " + text);
-}
+    <div>
+      <button id="startButton">Start</button>
+      <button id="callButton">Call</button>
+      <button id="hangupButton">Hang Up</button>
+    </div>
 
-function gotStream(stream){
-  trace("Received local stream");
-  localVideo.src = URL.createObjectURL(stream);
-  localStream = stream;
-  callButton.disabled = false;
-}
+    <script>
 
-function start() {
-  trace("Requesting local stream");
-  startButton.disabled = true;
-  getUserMedia({audio:true, video:true}, gotStream,
-    function(error) {
-      trace("getUserMedia error: ", error);
-    });
-}
+      var localStream, localPeerConnection, remotePeerConnection;
 
-function call() {
-  callButton.disabled = true;
-  hangupButton.disabled = false;
-  trace("Starting call");
+      var localVideo = document.getElementById("localVideo");
+      var remoteVideo = document.getElementById("remoteVideo");
 
-  if (localStream.getVideoTracks().length > 0) {
-    trace('Using video device: ' + localStream.getVideoTracks()[0].label);
-  }
-  if (localStream.getAudioTracks().length > 0) {
-    trace('Using audio device: ' + localStream.getAudioTracks()[0].label);
-  }
+      var startButton = document.getElementById("startButton");
+      var callButton = document.getElementById("callButton");
+      var hangupButton = document.getElementById("hangupButton");
+      startButton.disabled = false;
+      callButton.disabled = true;
+      hangupButton.disabled = true;
+      startButton.onclick = start;
+      callButton.onclick = call;
+      hangupButton.onclick = hangup;
 
-  var servers = null;
+      function trace(text) {
+        console.log((performance.now() / 1000).toFixed(3) + ": " + text);
+      }
 
-  localPeerConnection = new RTCPeerConnection(servers);
-  trace("Created local peer connection object localPeerConnection");
-  localPeerConnection.onicecandidate = gotLocalIceCandidate;
+      function gotStream(stream){
+        trace("Received local stream");
+        localVideo.src = URL.createObjectURL(stream);
+        localStream = stream;
+        callButton.disabled = false;
+      }
 
-  remotePeerConnection = new RTCPeerConnection(servers);
-  trace("Created remote peer connection object remotePeerConnection");
-  remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
-  remotePeerConnection.onaddstream = gotRemoteStream;
+      function start() {
+        trace("Requesting local stream");
+        startButton.disabled = true;
+        getUserMedia({audio:true, video:true}, gotStream,
+          function(error) {
+            trace("getUserMedia error: ", error);
+          });
+      }
 
-  localPeerConnection.addStream(localStream);
-  trace("Added localStream to localPeerConnection");
-  localPeerConnection.createOffer(gotLocalDescription,handleError);
-}
+      function call() {
+        callButton.disabled = true;
+        hangupButton.disabled = false;
+        trace("Starting call");
 
-function gotLocalDescription(description){
-  localPeerConnection.setLocalDescription(description);
-  trace("Offer from localPeerConnection: \n" + description.sdp);
-  remotePeerConnection.setRemoteDescription(description);
-  remotePeerConnection.createAnswer(gotRemoteDescription,handleError);
-}
+        if (localStream.getVideoTracks().length > 0) {
+          trace('Using video device: ' + localStream.getVideoTracks()[0].label);
+        }
+        if (localStream.getAudioTracks().length > 0) {
+          trace('Using audio device: ' + localStream.getAudioTracks()[0].label);
+      }
 
-function gotRemoteDescription(description){
-  remotePeerConnection.setLocalDescription(description);
-  trace("Answer from remotePeerConnection: \n" + description.sdp);
-  localPeerConnection.setRemoteDescription(description);
-}
+      var servers = null;
 
-function hangup() {
-  trace("Ending call");
-  localPeerConnection.close();
-  remotePeerConnection.close();
-  localPeerConnection = null;
-  remotePeerConnection = null;
-  hangupButton.disabled = true;
-  callButton.disabled = false;
-}
+        localPeerConnection = new RTCPeerConnection(servers);
+        trace("Created local peer connection object localPeerConnection");
+        localPeerConnection.onicecandidate = gotLocalIceCandidate;
 
-function gotRemoteStream(event){
-  remoteVideo.src = URL.createObjectURL(event.stream);
-  trace("Received remote stream");
-}
+        remotePeerConnection = new RTCPeerConnection(servers);
+        trace("Created remote peer connection object remotePeerConnection");
+        remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
+        remotePeerConnection.onaddstream = gotRemoteStream;
 
-function gotLocalIceCandidate(event){
-  if (event.candidate) {
-    remotePeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
-    trace("Local ICE candidate: \n" + event.candidate.candidate);
-  }
-}
+        localPeerConnection.addStream(localStream);
+        trace("Added localStream to localPeerConnection");
+        localPeerConnection.createOffer(gotLocalDescription,handleError);
+      }
 
-function gotRemoteIceCandidate(event){
-  if (event.candidate) {
-    localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
-    trace("Remote ICE candidate: \n " + event.candidate.candidate);
-  }
-}
+      function gotLocalDescription(description){
+        localPeerConnection.setLocalDescription(description);
+        trace("Offer from localPeerConnection: \n" + description.sdp);
+        remotePeerConnection.setRemoteDescription(description);
+        remotePeerConnection.createAnswer(gotRemoteDescription,handleError);
+      }
 
-function handleError(){}
+      function gotRemoteDescription(description){
+        remotePeerConnection.setLocalDescription(description);
+        trace("Answer from remotePeerConnection: \n" + description.sdp);
+        localPeerConnection.setRemoteDescription(description);
+      }
 
-</script>
+      function hangup() {
+        trace("Ending call");
+        localPeerConnection.close();
+        remotePeerConnection.close();
+        localPeerConnection = null;
+        remotePeerConnection = null;
+        hangupButton.disabled = true;
+        callButton.disabled = false;
+      }
 
-</body>
+      function gotRemoteStream(event){
+        remoteVideo.src = URL.createObjectURL(event.stream);
+        trace("Received remote stream");
+      }
+
+      function gotLocalIceCandidate(event){
+        if (event.candidate) {
+          remotePeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+          trace("Local ICE candidate: \n" + event.candidate.candidate);
+        }
+      }
+
+      function gotRemoteIceCandidate(event){
+        if (event.candidate) {
+          localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+          trace("Remote ICE candidate: \n " + event.candidate.candidate);
+        }
+      }
+
+      function handleError(){}
+
+    </script>
+
+  </body>
 
 </html>
