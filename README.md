@@ -1,6 +1,6 @@
 #webRTC project 1
 
-This repository shows my work work on a project including webRTC!
+This repository shows my work on a project including webRTC!
 
 ###Here are a few of the programs and languages I'll be using:
 
