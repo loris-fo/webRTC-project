@@ -1,4 +1,4 @@
-#webRTC project 1
+#webRTC project
 
 This repository shows my work on a project including webRTC!
 
